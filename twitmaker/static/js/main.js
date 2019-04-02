@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const newItem = document.createElement('li');
       newItem.className = 'tweet';
       const newTime = document.createElement('time');
-      newTime.innerText = data.created_at;
+      const date = new Date(data.created_at);
+      newTime.innerText = date.toUTCString();
       newItem.append(newTime);
       const newParagraph = document.createElement('p');
       newParagraph.innerText = data.message;

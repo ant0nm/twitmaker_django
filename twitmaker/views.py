@@ -5,7 +5,7 @@ from twitmaker.models import Tweet
 from twitmaker.forms import TweetForm
 
 def index(request):
-    tweets = Tweet.objects.all()
+    tweets = Tweet.objects.all().order_by("-created_at")
     context = {'tweets': tweets, 'form': TweetForm()}
     return render(request, 'index.html', context)
 
@@ -19,5 +19,5 @@ def create_tweet(request):
         tweet_dict['created_at'] = tweet.created_at
         return JsonResponse(tweet_dict)
     else:
-        context = {'tweets': Tweet.objects.all(), 'form': form}
+        context = {'tweets': Tweet.objects.all().order_by("-created_at"), 'form': form}
         return render(request, 'index.html', context)
